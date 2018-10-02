@@ -1,0 +1,53 @@
+#!/bin/bash
+
+# small script to backup the majority of /home/cory
+
+# Desktop
+printf "\n\n##################################################\n### rsync-ing ~/Desktop to /mnt/backup/Desktop ###\n##################################################\n"
+/usr/bin/rsync -avzh /home/cory/Desktop/ /mnt/backup/Desktop || { echo "Script error while syncing ~/Desktop" >&2;exit 1; }
+
+# Documents
+printf "\n\n######################################################\n### rsync-ing ~/Documents to /mnt/backup/Documents ###\n######################################################\n"
+/usr/bin/rsync -avzh --exclude=**/*LinuxISOs*/ --exclude=**/*WindowsISOs*/ /home/cory/Documents/ /mnt/backup/Documents || { echo "Script error while syncing ~/Documents" >&2;exit 1; }
+
+# Pictures
+printf "\n\n####################################################\n### rsync-ing ~/Pictures to /mnt/backup/Pictures ###\n####################################################\n"
+/usr/bin/rsync -avzh /home/cory/Pictures/ /mnt/backup/Pictures || { echo "Script error while syncing ~/Pictures" >&2;exit 1; }
+
+# Downloads
+printf "\n\n######################################################\n### rsync-ing ~/Downloads to /mnt/backup/Downloads ###\n######################################################\n"
+/usr/bin/rsync -avzh /home/cory/Downloads/ /mnt/backup/Downloads || { echo "Script error while syncing ~/Downloads" >&2;exit 1; }
+
+# Scripts
+printf "\n\n##########################################\n### rsync-ing ~/bin to /mnt/backup/bin ###\n##########################################\n"
+/usr/bin/rsync -avzh /home/cory/bin/ /mnt/backup/bin || { echo "Script error while syncing ~/bin" >&2;exit 1; }
+
+# Arch Build System
+printf "\n\n##########################################\n### rsync-ing ~/abs to /mnt/backup/abs ###\n##########################################\n"
+/usr/bin/rsync -avzh /home/cory/abs/ /mnt/backup/abs || { echo "Script error while syncing ~/abs" >&2;exit 1; }
+
+# Home config dir
+printf "\n\n##########################################\n### rsync-ing ~/etc to /mnt/backup/etc ###\n##########################################\n"
+/usr/bin/rsync -avzh /home/cory/etc/ /mnt/backup/etc || { echo "Script error while syncing ~/etc" >&2;exit 1; }
+
+# Home log files
+printf "\n\n############################################\n### rsync-ing ~/logs to /mnt/backup/logs ###\n############################################\n"
+/usr/bin/rsync -avzh /home/cory/logs/ /mnt/backup/logs || { echo "Script error while syncing ~/logs" >&2;exit 1; }
+
+# Home dot-files.bak
+printf "\n\n##############################################################\n### rsync-ing ~/dot-files.bak to /mnt/backup/dot-files.bak ###\n##############################################################\n"
+if [[ ! -f /mnt/backup/dot-files.bak ]]; then
+   /usr/bin/rsync -avzh /home/cory/dot-files.bak /mnt/backup/dot-files.bak || { echo "Script error while syncing ~/dot-files.bak" >&2;exit 2; }
+else
+   /usr/bin/rsync -avzh /home/cory/dot-files.bak/ /mnt/backup/dot-files.bak || { echo "Script error while syncing ~/dot-files.bak" >&2;exit 1; }
+fi
+
+# Public dir
+printf "\n\n################################################\n### rsync-ing ~/Public to /mnt/backup/Public ###\n################################################\n"
+/usr/bin/rsync -avzh /home/cory/Public/ /mnt/backup/Public || { echo "Script error while syncing ~/dot-files.bak" >&2;exit 1; }
+
+# Hack the Box dir
+printf "\n\n##########################################\n### rsync-ing ~/htb to /mnt/backup/htb ###\n##########################################\n"
+/usr/bin/rsync -avzh /home/cory/htb/ /mnt/backup/htb || { echo "Script error while syncing ~/htb" >&2; exit 1; }
+
+printf "\n##############\n### Success ###\n##############\n" && exit 0

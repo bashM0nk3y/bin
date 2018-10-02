@@ -1,0 +1,41 @@
+#!/bin/bash
+
+# small script to backup the majority of /home/cory
+
+# Desktop
+printf "\nrsync-ing ~/Desktop\n"
+/usr/bin/rsync -avzh /home/cory/Desktop/ /mnt/usb/Desktop || { echo "Script error while syncing ~/Desktop" >&2;exit 1; }
+
+# Documents
+printf "\nrsync-ing ~/Documents\n"
+/usr/bin/rsync -avzh --exclude=**/*LinuxISOs*/ --exclude=**/*WindowsISOs*/ /home/cory/Documents/ /mnt/usb/Documents || { echo "Script error while syncing ~/Documents" >&2;exit 1; }
+
+# Pictures
+printf "\nrsync-ing ~/Pictures\n"
+/usr/bin/rsync -avzh /home/cory/Pictures/ /mnt/usb/Pictures || { echo "Script error while syncing ~/Pictures" >&2;exit 1; }
+
+# Downloads
+printf "\nrsync-ing ~/Downloads\n"
+/usr/bin/rsync -avzh --exclude=**/*LinuxISOs*/ --exclude=**/*WindowsISOs*/ --exclude=**/*pluralsight_exersize_files*/ /home/cory/Downloads/ /mnt/usb/Downloads || { echo "Script error while syncing ~/Downloads" >&2;exit 1; }
+
+# Scripts
+printf "\nrsync-ing ~/bin\n"
+/usr/bin/rsync -avzh /home/cory/bin/ /mnt/usb/bin || { echo "Script error while syncing ~/bin" >&2;exit 1; }
+
+# Videos
+#printf "\nrsync-ing ~/Videos\n"
+#/usr/bin/rsync -avzh /home/cory/Videos/ /mnt/usb/Videos || { echo "Script error while syncing ~/Videos" >&2;exit 1; }
+
+# Arch Build System
+printf "\nrsync-ing ~/abs\n"
+/usr/bin/rsync -avzh /home/cory/abs/ /mnt/usb/abs || { echo "Script error while syncing ~/abs" >&2;exit 1; }
+
+# Home config dir
+printf "\nrsync-ing ~/etc\n"
+/usr/bin/rsync -avzh /home/cory/etc/ /mnt/usb/etc || { echo "Script error while syncing ~/etc" >&2;exit 1; }
+
+# Home log files
+printf "\nrsync-ing ~/logs\n"
+/usr/bin/rsync -avzh /home/cory/logs/ /mnt/usb/logs || { echo "Script error while syncing ~/logs" >&2;exit 1; }
+
+echo "Success" && exit 0

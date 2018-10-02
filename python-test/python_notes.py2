@@ -1,0 +1,575 @@
+#!/usr/bin/python2
+
+
+
+
+
+from random import randint
+
+# Generates a number from 1 through 10 inclusive
+random_number = randint(1, 10)
+
+guesses_left = 3
+# Start your game!
+while guesses_left > 0:
+  guess = int(raw_input("Guess a number between 1 and 10: "))
+  if guess == random_number:
+    print "You win!"
+    break
+  else:
+    print "Wrong.."
+    if guesses_left == 1:
+        print str(guesses_left) + " guess left! Choose wisely!"
+    elif guesses_left == 0:
+        continue
+    else:
+        print str(guesses_left) + " guesses left."
+    guesses_left -= 1
+else:
+  print "You lose."
+
+
+
+# Appending strings to a list
+hobbies = []
+
+for num in range(3):
+  hobby =  str(raw_input("Tell me one of your favorite hobbies: "))
+  hobbies.append(hobby)
+
+print hobbies
+
+
+
+# Replacing chars in a string
+phrase = "A bird in the hand..."
+
+# Add your for loop
+for char in phrase:
+  if char == 'A' or char == 'a':
+    print 'X',
+  else:
+    print char,
+
+#Don't delete this print statement!
+print   # Ensures that the following print statement will be on a new line
+        # because of the previous print statement appended with a ','
+
+
+
+########---> Iterate through a dicttionary by key <---#######
+d = {'a': 'apple', 'b': 'berry', 'c': 'cherry'}
+
+for key in d:
+  # Your code here!
+  print "{} {}".format(key, d[key])
+
+
+
+# Enumerating lists with indexes for each value
+choices = ['pizza', 'pasta', 'salad', 'nachos']
+
+print 'Your choices are:'
+for index, item in enumerate(choices):
+  print index + 1, item
+
+
+
+#######---> Grade calculation code... <---#######
+
+# list of grades
+grades = [100, 100, 90, 40, 80, 100, 85, 70, 90, 65, 90, 85, 50.5]
+
+# Iterate through and print each grade
+def print_grades(grades_input):
+  for index, grade in enumerate(grades_input):
+    print "Grade " + str(index + 1) + ": " + str(grade)
+
+# Sum of grades
+def grades_sum(scores):
+  total = 0
+  for score in scores:
+    total += score
+  return total
+
+# Average of grades
+def grades_average(grades_input):
+  sum_of_grades = grades_sum(grades_input)
+  average = sum_of_grades / float(len(grades_input))
+  return average
+
+# Variance
+def grades_variance(scores):
+  average = grades_average(scores)
+  variance = 0
+  for score in scores:
+    variance += (average - score) ** 2
+  return variance / len(scores)
+
+# Standard deviation
+def grades_std_deviation(variance):
+  return variance ** 0.5
+
+variance = grades_variance(grades)  # So grades_std_deviation() works correctly
+
+## Print results as a float with no more than 2 digits after the decimal
+print_grades(grades)
+print "Sum of grades: {:.2f}".format(grades_sum(grades))
+print "Average of grades (truncated): {:.2f}".format(grades_average(grades))
+print "Variance (truncated): {:.2f}".format(variance)
+print "Standard deviation (truncated): {:.2f}".format(grades_std_deviation(variance))
+
+#######---> END Grade calculation code <---#######
+
+
+
+
+# Comparing two lists with zip()
+list_a = [3, 9, 17, 15, 19]
+list_b = [2, 4, 8, 10, 30, 40, 50, 60, 70, 80, 90]
+
+for a, b in zip(list_a, list_b):
+  # Add your code here!
+  if a > b:
+    print a
+  else:
+    print b
+
+
+
+# for/else example
+fruits = ['banana', 'apple', 'orange', 'tomato', 'pear', 'grape']
+
+print 'You have...'
+for f in fruits:
+  if f == 'tomato':
+    print 'A tomato is not a fruit!' # (It actually is.)
+    break
+  print 'A', f
+else:
+  print 'A fine selection of fruits!'
+
+
+
+# Add all the digits of an integer together and return the result
+def digit_sum(n):
+  sum = 0
+  for digit in str(n):
+    sum += int(digit)
+  return sum
+
+print digit_sum(1234) # Should equal 10
+
+# Another way of doing the same thing via modulo operator
+def digit_sum(n):
+  sum = 0
+  while n:
+    num = n % 10
+    n = n // 10
+    sum += num
+  return sum
+
+print digit_sum(1234) # Should equal 10
+
+
+
+# One method to calculate a factorial
+def factorial(x):
+    total = 1
+    while x>0:
+        total *= x
+        x-=1
+    return total
+
+
+
+# Clunky method to determine if a number is prime or not
+def is_prime(x):
+    if x < 2:
+        return False
+    else:
+        for n in range(2, x-1):
+            if x % n == 0:
+                return False
+        return True
+
+print is_prime(53)
+
+
+
+# Function to reverse a string
+def reverse(text):
+    word = ""
+    l = len(text) - 1
+    while l >= 0:
+        word = word + text[l]
+        l -= 1
+    return word
+
+
+
+# Replace words in a string by converting into a list and back
+def censor(text, word):
+    words = text.split()
+    result = ''
+    stars = '*' * len(word)
+    count = 0
+    for i in words:
+        if i == word:
+            words[count] = stars
+        count += 1
+    result =' '.join(words)
+
+    return result
+
+
+# REPL output, built-ins split() and join()
+>>> text = "This is some text"
+>>> list = text.split(' ')
+>>> print list
+['This', 'is', 'some', 'text']
+>>> text = " ".join(list)
+>>> print text
+This is some text
+>>> print list
+['This', 'is', 'some', 'text']
+>>> txt = " ".join(list)
+>>> print txt
+This is some text
+
+
+
+# Remove duplicates from list
+def remove_duplicates(list):
+    no_dup = []
+    for i in list:
+        if i not in no_dup:
+            no_dup.append(i)
+    return no_dup
+
+list_of_int = []
+c = 0
+while c < 10:
+    list_of_int.append(c)
+    c += 1
+
+list_of_int.append(9)
+list_of_int.append(9)
+list_of_int.append(9)
+
+print list_of_int
+
+print remove_duplicates(list_of_int)
+
+
+
+# Return the median of list
+def median(list):
+  sorted_list = sorted(list)
+  if len(list) % 2 != 0:
+    median = sorted_list[len(list) / 2]
+  elif len(list) % 2 == 0:
+    mid_index1 = len(list) / 2
+    mid_index2 = mid_index1 - 1
+    median = (sorted_list[mid_index1] + sorted_list[mid_index2]) / 2.0
+
+  return median
+
+
+
+######---> List comprehensions <---#######
+
+new_list = [x for x in range(1, 6)]
+# => [1, 2, 3, 4, 5]
+
+evens_to_50 = [i for i in range(51) if i % 2 == 0]
+# => [2, 4, 6, ..., 46, 48, 50]
+
+doubles_by_3 = [x * 2 for x in range(1, 6) if (x * 2) % 3 == 0]
+# => [6]
+
+even_squares = [x ** 2 for x in range(1, 12) if x % 2 == 0]
+# => [4, 16, 36, 64, 100]
+
+cubes_by_four = [x ** 3 for x in range(1,11) if (x ** 3) % 4 == 0]
+# => [8, 64, 216, 512, 1000]
+
+##### List slicing #####
+l = [i ** 2 for i in range(1, 11)]
+# Should be [1, 4, 9, 16, 25, 36, 49, 64, 81, 100]
+print l[2:9:2]
+# => [9, 25, 49, 81]
+
+to_five = ['A', 'B', 'C', 'D', 'E']
+print to_five[3:]
+# prints ['D', 'E']
+print to_five[:2]
+# prints ['A', 'B']
+print to_five[::2]
+# print ['A', 'C', 'E']
+
+my_list = range(1, 11) # List of numbers 1 - 10
+print my_list[::2]
+# => [1, 3, 5, 7, 9]
+
+letters = ['A', 'B', 'C', 'D', 'E']
+print letters[::-1]
+# => ['E', 'D', 'C', 'B', 'A']
+
+my_list = range(1, 11)
+backwards = my_list[::-1]
+# => [10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
+
+to_one_hundred = range(101)
+backwards_by_tens = to_one_hundred[::-10]
+
+to_21 = [x for x in range(1,22)]
+odds = to_21[::2]
+middle_third = to_21[7:14:]
+# => [8, 9, 10, 11, 12, 13, 14] bc the value 7 is at index 8
+
+garbled = "!XeXgXaXsXsXeXmX XtXeXrXcXeXsX XeXhXtX XmXaX XI"
+message = garbled[::-2]
+print message
+
+######---> End list comprehensions <---#######
+
+
+
+######---> Anonymous functions <---#######
+
+my_list = range(16)
+print filter(lambda x: x % 3 == 0, my_list)
+# => [0, 3, 6, 9, 12, 15]
+
+languages = ["HTML", "JavaScript", "Python", "Ruby"]
+print filter(lambda x: x == 'Python', languages)
+# => ['Python']
+
+squares = [x ** 2 for x in range(1,11)]
+# => [1, 4, 9, 16, 25, 36, 49, 64, 81, 100]
+# Print the values between 30 and 70 with lambda
+print filter(lambda i: i >= 30 and i <= 70, squares)
+# => [36, 49, 64]
+
+garbled = "IXXX aXXmX aXXXnXoXXXXXtXhXeXXXXrX sXXXXeXcXXXrXeXt mXXeXsXXXsXaXXXXXXgXeX!XX"
+message = filter(lambda x: x != 'X', garbled)
+print message # => I am another secret message!
+
+######---> End anonymous functions <---#######
+
+
+
+######---> Bitwise Operators <---#######
+
+print 5 >> 4  # Right Shift
+print 5 << 1  # Left Shift
+print 8 & 5   # Bitwise AND
+print 9 | 4   # Bitwise OR
+print 12 ^ 42 # Bitwise XOR
+print ~88     # Bitwise NOT
+
+Append '0b' to denote binary format
+print 0b1,    #1
+print 0b10,   #2
+print 0b11,   #3
+print 0b100,  #4
+print 0b101,  #5
+print 0b110,  #6
+print 0b111   #7
+print "******"
+print 0b1 + 0b11  # 1 + 3 = 4
+print 0b11 * 0b11 # 3 * 3 = 9
+
+one = 0b1
+two = 0b10
+three = 0b11
+four = 0b100
+five = 0b101
+six = 0b110
+seven = 0b111
+eight = 0b1000
+nine = 0b1001
+ten = 0b1010
+eleven = 0b1011
+twelve = 0b1100
+
+2 ** 0 = 1
+2 ** 1 = 2
+2 ** 2 = 4
+2 ** 3 = 8
+2 ** 4 = 16
+2 ** 5 = 32
+2 ** 6 = 64
+2 ** 7 = 128
+2 ** 8 = 256
+2 ** 9 = 512
+2 ** 10 = 1024
+
+print int("1",2) # = 1
+print int("10",2) # = 2
+print int("111",2) # = 7
+print int("0b100",2) # = 4
+print int(bin(5),2) # = 5
+print int("11001001", 2) # = 201
+
+##-- Bitwise << and >> (shift left and shift right) operators --###
+
+##### Left Bit Shift (<<)
+0b000001 << 2 == 0b000100 (1 << 2 = 4)
+0b000101 << 3 == 0b101000 (5 << 3 = 40)
+
+##### Right Bit Shift (>>)
+0b0010100 >> 3 == 0b000010 (20 >> 3 = 2)
+0b0000010 >> 2 == 0b000000 (2 >> 2 = 0)
+
+shift_right = 0b1100
+shift_left = 0b1
+shift_right = shift_right >> 2
+shift_left = shift_left << 2
+print bin(shift_right) # Prints 0b11
+print bin(shift_left) # Prints 0b100
+
+a = 0b101
+# Tenth bit mask
+mask = (0b1 << 9)  # One less than ten
+desired = a ^ mask
+
+def flip_bit(number, n):
+  bit_to_flip = 0b1 << (n -1)
+  result = number ^ bit_to_flip
+  return bin(result)
+
+##-- Bitwise & (and) operator --###
+
+     a:   00101010   42
+     b:   00001111   15
+===================
+ a & b:   00001010   10
+
+0 & 0 = 0
+0 & 1 = 0
+1 & 0 = 0
+1 & 1 = 1
+
+def check_bit4(input):
+  mask = 0b1000
+  tmp = mask & input
+  if tmp > 0:
+    return "on"
+  else:
+    return "off"
+
+##-- Bitwise | (or) operator --###
+
+   a:  00101010  42
+    b:  00001111  15
+================
+a | b:  00101111  47
+
+0 | 0 = 0
+0 | 1 = 1
+1 | 0 = 1
+1 | 1 = 1
+
+a = 0b110 # 6
+mask = 0b1 # 1
+desired =  a | mask # 0b111, or 7
+
+a = 0b10111011
+desired = a | 0b100
+print bin(desired) # 0b10111111, or 191
+
+##-- Bitwise ^ (XOR, exclusive or) operator --###
+
+    a:  00101010   42
+    b:  00001111   15
+================
+a ^ b:  00100101   37
+
+0 ^ 0 = 0
+0 ^ 1 = 1
+1 ^ 0 = 1
+1 ^ 1 = 0
+
+a = 0b110 # 6
+mask = 0b111 # 7
+desired =  a ^ mask # 0b1
+
+a = 0b11101110
+mask = 0b11111111
+print bin(a ^ mask) # 0b10001, or 17
+
+##-- Bitwise ~ (NOT) operator --###
+
+print ~1 # Prints -2
+print ~2 # Prints -3
+print ~3 # Prints -4
+print ~42 # Prints -43
+print ~123 # Prints -124
+
+
+
+######---> END Bitwise Operators <---#######
+
+
+
+#######---> RGB-HEX Converter <---#######
+
+def rgb_hex():
+  invalid_msg = "Invalid input"
+  red = int(raw_input('Enter red (R) value: '))
+  if red < 0 or red > 255:
+    print invalid_msg
+    return
+
+  green = int(raw_input('Enter green (G) value: '))
+  if green < 0 or green > 255:
+    print invalid_msg
+    return
+
+  blue = int(raw_input('Enter blue (B) value: '))
+  if blue < 0 or blue > 255:
+    print invalid_msg
+    return
+
+  val = (red << 16) + (green << 8) + blue
+  print "%s" % (hex(val)[2:]).upper()
+
+def hex_rgb():
+  invalid_msg = "Invalid input"
+  hex_val = raw_input('Enter a hexadecimal value: ')
+  if len(hex_val) != 6:
+    print invalid_msg
+    return
+  else:
+    hex_val = int(hex_val, 16)
+  two_hex_digits = 2 ** 8
+  blue = hex_val % two_hex_digits
+  hex_val = hex_val >> 8
+  green = hex_val % two_hex_digits
+  hex_val = hex_val >> 8
+  red = hex_val % two_hex_digits
+  print "{}{}{}".format(red, green, blue)
+
+def convert():
+  while True:
+    option = raw_input("Enter 1 to convert RGB to HEX\n" +
+                      "Enter 2 to convert HEX to RGB\n" +
+                      "Enter X to Exit:")
+    if option == '1':
+      print "RGB to Hex..."
+      rgb_hex()
+    elif option == '2':
+      print "Hex to RGB..."
+      hex_rgb()
+    elif option.lower() == 'x':
+      break
+    else:
+      print "Error"
+
+convert()
+
+#######---> END RGB-HEX Converter <---#######
+
+

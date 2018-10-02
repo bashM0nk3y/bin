@@ -1,0 +1,11 @@
+#!/usr/bin/perl
+
+# String repitition...
+
+print "Enter a string:\n";
+$str = <STDIN>;
+
+print "Enter a number:\n";
+chomp($num = <STDIN>);
+
+print $str x $num;

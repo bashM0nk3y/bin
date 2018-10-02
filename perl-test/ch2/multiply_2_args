@@ -1,0 +1,13 @@
+#!/usr/bin/perl
+
+# Multiply two args read from stdin
+
+print "This program multiplies 2 numbers read from stdin.\n\nEnter first numeric arg:\n";
+
+chomp($arg1 = <STDIN>);
+
+print "Enter second numeric arg:\n";
+
+chomp($arg2 = <STDIN>);
+
+print $arg1 . " x " . $arg2 . " = " . $arg1 * $arg2 . "\n";

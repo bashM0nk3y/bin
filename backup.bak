@@ -1,0 +1,37 @@
+#!/bin/bash
+
+# small script to backup the majority of /home/cory
+
+# Desktop
+printf "\nrsync-ing ~/Desktop to /mnt/backup/Desktop\n"
+/usr/bin/rsync -avzh /home/cory/Desktop/ /mnt/backup/Desktop || { echo "Script error while syncing ~/Desktop" >&2;exit 1; }
+
+# Documents
+printf "\nrsync-ing ~/Documents to /mnt/backup/Documents\n"
+/usr/bin/rsync -avzh --exclude=**/*LinuxISOs*/ --exclude=**/*WindowsISOs*/ /home/cory/Documents/ /mnt/backup/Documents || { echo "Script error while syncing ~/Documents" >&2;exit 1; }
+
+# Pictures
+printf "\nrsync-ing ~/Pictures to /mnt/backup/Pictures\n"
+/usr/bin/rsync -avzh /home/cory/Pictures/ /mnt/backup/Pictures || { echo "Script error while syncing ~/Pictures" >&2;exit 1; }
+
+# Downloads
+printf "\nrsync-ing ~/Downloads to /mnt/backup/Downloads\n"
+/usr/bin/rsync -avzh /home/cory/Downloads/ /mnt/backup/Downloads || { echo "Script error while syncing ~/Downloads" >&2;exit 1; }
+
+# Scripts
+printf "\nrsync-ing ~/bin to /mnt/backup/bin\n"
+/usr/bin/rsync -avzh /home/cory/bin/ /mnt/backup/bin || { echo "Script error while syncing ~/bin" >&2;exit 1; }
+
+# Arch Build System
+printf "\nrsync-ing ~/abs to /mnt/backup/abs\n"
+/usr/bin/rsync -avzh /home/cory/abs/ /mnt/backup/abs || { echo "Script error while syncing ~/abs" >&2;exit 1; }
+
+# Home config dir
+printf "\nrsync-ing ~/etc to /mnt/backup/etc\n"
+/usr/bin/rsync -avzh /home/cory/etc/ /mnt/backup/etc || { echo "Script error while syncing ~/etc" >&2;exit 1; }
+
+# Home log files
+printf "\nrsync-ing ~/logs to /mnt/backup/logs\n"
+/usr/bin/rsync -avzh /home/cory/logs/ /mnt/backup/logs || { echo "Script error while syncing ~/logs" >&2;exit 1; }
+
+echo "Success" && exit 0

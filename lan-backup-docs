@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# A very simple script that backs up ~/Documents to LAN based ssh server.
+
+/usr/bin/rsync -avzh -e "ssh -p443 -i/home/cory/.ssh/id_rsa" Documents/ cory@$LANSRV:/home/cory/thinkpad/Documents || { printf "\nError backing up ~/Documents\n" >&2; exit 1; }
+
+printf "\nSuccess\n" && exit 0

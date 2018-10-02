@@ -1,0 +1,57 @@
+#!/bin/bash
+
+# small script to backup the majority of /home/cory
+
+# Desktop
+printf "\n\n  ###########################\n  ### rsync-ing ~/Desktop ###\n  ###########################\n"
+/usr/bin/rsync -avzh -e "ssh -p443" /home/cory/Desktop/ cory@$LANSRV:/home/cory/thinkpad/Desktop || { echo "Script error while syncing ~/Desktop" >&2;exit 1; }
+
+# Documents
+printf "\n\n  #############################\n  ### rsync-ing ~/Documents ###\n  #############################\n"
+/usr/bin/rsync -avzh -e "ssh -p443" --exclude=**/*LinuxISOs*/ --exclude=**/*WindowsISOs*/ --exclude=**/*CEH_prep*/ /home/cory/Documents/ cory@$LANSRV:/home/cory/thinkpad/Documents || { echo "Script error while syncing ~/Documents" >&2;exit 1; }
+
+# Pictures
+printf "\n\n  ############################\n  ### rsync-ing ~/Pictures ###\n  ############################\n"
+/usr/bin/rsync -avzh -e "ssh -p443" /home/cory/Pictures/ cory@$LANSRV:/home/cory/thinkpad/Pictures || { echo "Script error while syncing ~/Pictures" >&2;exit 1; }
+
+# Downloads
+printf "\n\n  #############################\n  ### rsync-ing ~/Downloads ###\n  #############################\n"
+/usr/bin/rsync -avzh -e "ssh -p443" --exclude=**/*Metasploitable2-Linux*/ --exclude=**/*black-arch*/ --exclude=**/*LinuxISOs*/ --exclude=**/*WindowsISOs*/ --exclude=**/*pluralsight_exersize_files*/ /home/cory/Downloads/ cory@$LANSRV:/home/cory/thinkpad/Downloads || { echo "Script error while syncing ~/Downloads" >&2;exit 1; }
+
+# Scripts
+printf "\n\n  #######################\n  ### rsync-ing ~/bin ###\n  #######################\n"
+/usr/bin/rsync -avzh -e "ssh -p443" /home/cory/bin/ cory@$LANSRV:/home/cory/thinkpad/bin || { echo "Script error while syncing ~/bin" >&2;exit 1; }
+
+# Videos
+#printf "\n\n  ##########################\n  ### rsync-ing ~/Videos ###\n  ##########################\n"
+#/usr/bin/rsync -avzh -e "ssh -p443" /home/cory/Videos/ cory@$LANSRV:/home/cory/thinkpad/Videos || { echo "Script error while syncing ~/Videos" >&2;exit 1; }
+
+# Arch Build System
+printf "\n\n  #######################\n  ### rsync-ing ~/abs ###\n  #######################\n"
+/usr/bin/rsync -avzh -e "ssh -p443" /home/cory/abs/ cory@$LANSRV:/home/cory/thinkpad/abs || { echo "Script error while syncing ~/abs" >&2;exit 1; }
+
+# Home config dir
+printf "\n\n  #######################\n  ### rsync-ing ~/etc ###\n  #######################\n"
+/usr/bin/rsync -avzh -e "ssh -p443" /home/cory/etc/ cory@$LANSRV:/home/cory/thinkpad/etc || { echo "Script error while syncing ~/etc" >&2;exit 1; }
+
+# Home log files
+printf "\n\n  ########################\n  ### rsync-ing ~/logs ###\n  ########################\n"
+/usr/bin/rsync -avzh -e "ssh -p443" /home/cory/logs/ cory@$LANSRV:/home/cory/thinkpad/logs || { echo "Script error while syncing ~/logs" >&2;exit 1; }
+
+# Home dot-files
+printf "\n\n  #############################\n  ### rsync-ing ~/dotfiles ###\n  #############################\n"
+/usr/bin/rsync -avzh -e "ssh -p443" /home/cory/dotfiles/ cory@$LANSRV:/home/cory/thinkpad/dotfiles || { echo "Script error while syncing ~/dotfiles.bak" >&2;exit 1; }
+
+# Notes
+printf "\n\n  #########################\n  ### rsync-ing ~/notes ###\n  #########################\n"
+/usr/bin/rsync -avzh -e "ssh -p443" /home/cory/notes/ cory@$LANSRV:/home/cory/thinkpad/notes || { echo "Script error while syncing ~/notes" >&2;exit 1; }
+
+# Public dir
+printf "\n\n  ##########################\n  ### rsync-ing ~/Public ###\n  ##########################\n"
+/usr/bin/rsync -avzh -e "ssh -p443" /home/cory/Public/ cory@$LANSRV:/home/cory/thinkpad/Public || { echo "Script error while syncing ~/dot-files.bak" >&2;exit 1; }
+
+# Hack the Box dir
+printf "\n\n  #######################\n  ### rsync-ing ~/htb ###\n  #######################\n"
+/usr/bin/rsync -avzh -e "ssh -p443" /home/cory/htb/ cory@$LANSRV:/home/cory/thinkpad/htb || { echo "Script error while syncing ~/htb" >&2; exit 1; }
+
+printf "\n  ###############\n  ### Success ###\n  ###############\n" && exit 0

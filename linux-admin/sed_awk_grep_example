@@ -1,0 +1,33 @@
+# here '@' is the delimeter, p command for print, -n to supress standard out
+sed -n ' /^cory/ s@/bin/bash@/bin/sh@ p' /etc/passwd
+
+# d command for delete
+sed '/^server\s[0-9]\sdah/ d' test2
+sed ' /^server\s[0-9]\.ubuntu/ d' etc.ntp.conf
+
+# i command for insert (like vim 'O'), a command for append (vim 'o')
+sed ' /^server 3/ i server ntp.example.com' etc.ntp.conf
+
+# multiple sed blocks from CLI using '{}'
+sed ' {
+   /^server 0/ i ntp.example.com
+   /^server\s[0-9]\.ubuntu/ d
+} ' etc.ntp.conf
+
+# -f switch to read regex from file
+sed -f ntp.sed etc.ntp.conf
+
+# -t switch to use sudo over ssh
+ssh -t user@server sudo sed -i.bak -f /tmp/ntp.sed etc.ntp.conf
+
+# capitalizes first field (last name), lowercase second field (first name)
+# comma delimeter
+sed 's/\([^,]*\),\([^,]*\)/\U\1,\L\2/' employees
+
+# e command for execute, replaces beginning of line with 'ls -l '
+sed 's/^/ls -l /e' list_of_files.txt
+
+# from catalog.sed, replaces ',' with ':' and also inserts commas
+# in their correct positions
+s/,/:/g
+s/\(^\|[^0-9.]\)\([0-9]\+\)\([0-9]\{3\}\)/\1\2,\3/g

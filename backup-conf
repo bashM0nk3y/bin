@@ -1,0 +1,37 @@
+#!/bin/bash
+
+# A small script to backup some config files
+
+### User Files ###
+##################
+
+# ~/.bash_aliases
+
+# ~/.bash_logout
+
+# ~/.bash_profile
+
+# ~/.bashrc
+
+# ~/.gvimrc
+
+# ~/.vimrc
+
+### System Files ###
+####################
+
+# /etc/bash.bashrc
+
+# /etc/vimrc
+
+# /etc/ssh_config
+
+# /etc/sshd_config
+
+# /etc/fstab
+
+# /etc/mke2fs.conf
+
+# /etc/profile
+
+# /etc/nanorc ???

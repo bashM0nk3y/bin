@@ -1,0 +1,73 @@
+#!/bin/bash
+
+# A small script to invoke vim, create a file, and make said file executable
+# all with one simple command.
+#
+# Usage:
+#     vimx <filename>
+#
+
+# Some simple function definitions...
+mkfile () {
+   touch $1 || { echo "vimx failed to create $1" >&2; exit 2; }
+}
+
+setexe () {
+   chmod u+x $1 || { echo "vimx couldn't set the executable bit." >&2; exit 4; }
+}
+
+rmfile () {
+   rm -f $1 || { echo "vimx failed to remove $1" >&2; exit 1; }
+}
+
+openfile () {
+   $EDITOR $1 || { echo "vimx couldn't open the file with vim for some reason" >&2; exit 3; }
+}
+
+# Does $1 already exist?
+while [[ -f $1 ]]; do
+   echo "$1 already exists" >&2
+   echo "What do you want vimx to do:"
+   echo "   (1) - Set executable bit and exit"
+   echo "   (2) - Set executable bit and edit existing file"
+   echo "   (3) - Set executable bit and overwrite existing file"
+   echo "   (4) - Abort"
+
+   # If so, what does $USER want to do?
+   read -p "Choose an option: "
+   if [[ $REPLY -eq 1 ]]; then
+      setexe $1 && echo "$1 is now executable"
+
+      exit 0
+
+   elif [[ $REPLY -eq 2 ]]; then
+      setexe $1
+      openfile $1
+
+      exit 0
+
+   elif [[ $REPLY -eq 3 ]]; then
+      rmfile $1
+      openfile $1
+
+      exit 0
+
+   elif [[ $REPLY -eq 4 ]]; then
+      echo "Existing file not modified. Aborting.."
+      exit 0
+
+   else
+      echo "Invalid option" >&2
+   fi
+done
+
+# Create file
+mkfile $1
+
+# Make file executable
+setexe $1
+
+# Open file
+openfile $1
+
+exit 0

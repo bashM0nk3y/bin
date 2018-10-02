@@ -1,0 +1,46 @@
+#!/usr/bin/perl
+
+# A simple program that excersies the 'total' subroutine.
+
+sub total {
+    my $sum; 
+    foreach (@_) {
+        $sum += $_;
+    }
+    $sum;
+}
+
+sub average {
+    if (@_ == 0) { return }
+    my $count = @_;
+    my $sum = total(@_);
+    $sum/$count;
+}
+
+sub above_avg {
+    my $avg = average(@_);
+    my @list;
+    foreach (@_) {
+        if ($_ > $avg) {
+            push(@list, $_);
+        }
+    }
+    @list;
+}
+
+#my @fred = qw{ 1 3 5 7 9 };
+#my $fred_total = total(@fred);
+#print "The total of \@fred is $fred_total.\n";
+
+#print "The total of 1-1000 is ", total(1..1000), ".\n";
+
+#print "Enter some numbers on seperate lines: \n";
+#my $user_total = total(<STDIN>);
+#print "The total of those numbers is $user_total.\n";
+
+my @fred = above_avg(1..10);
+print "\@fred is @fred\n";
+print "(Should be 6 7 8 9 10)\n";
+my @barney = above_avg(100, 1..10);
+print "\@barney is @barney\n";
+print "(Should be just 100)\n";

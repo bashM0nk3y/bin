@@ -1,0 +1,11 @@
+#!/usr/bin/perl
+
+# Reverse a multi-line list of strings
+
+@strings = <STDIN>;
+
+push(@strings, "\n");
+
+$strings[-1] .= "\n";
+
+print reverse(@strings);

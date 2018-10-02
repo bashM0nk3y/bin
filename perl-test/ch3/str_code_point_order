@@ -1,0 +1,10 @@
+#!/usr/bin/perl
+
+# Reads a list of strings (on seperate lines) until EOF. Then prints the strings
+# in code point order.
+
+chomp(@lines = <STDIN>);
+
+@sorted = sort @lines;
+
+print "@sorted\n";

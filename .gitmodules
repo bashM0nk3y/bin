@@ -1,0 +1,3 @@
+[submodule "pen-test/ZIPCracker"]
+	path = pen-test/ZIPCracker
+	url = https://github.com/un1x00/ZIPCracker.git

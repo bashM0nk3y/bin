@@ -1,0 +1,41 @@
+#!/bin/bash
+
+# small script to backup the majority of /home/cory
+
+# Desktop
+printf "\nrsync-ing ~/Desktop\n"
+/usr/bin/rsync -avzh -e "ssh -p443 -i /home/cory/.ssh/id" /home/cory/Desktop/ cory@$LANSRV:/home/cory/thinkpad/Desktop || { echo "Script error while syncing ~/Desktop" >&2;exit 1; }
+
+# Documents
+printf "\nrsync-ing ~/Documents\n"
+/usr/bin/rsync -avzh -e "ssh -p443 -i /home/cory/.ssh/id" --exclude=**/*LinuxISOs*/ --exclude=**/*WindowsISOs*/ --exclude=**/*CEH_prep*/ /home/cory/Documents/ cory@$LANSRV:/home/cory/thinkpad/Documents || { echo "Script error while syncing ~/Documents" >&2;exit 1; }
+
+# Pictures
+echo "rsync-ing ~/Pictures"
+/usr/bin/rsync -avzh -e "ssh -p443 -i /home/cory/.ssh/id" /home/cory/Pictures/ cory@$LANSRV:/home/cory/thinkpad/Pictures || { echo "Script error while syncing ~/Pictures" >&2;exit 1; }
+
+# Downloads
+printf "\nrsync-ing ~/Downloads\n"
+/usr/bin/rsync -avzh -e "ssh -p443 -i /home/cory/.ssh/id" --exclude=**/*pluralsight_exersize_files*/ /home/cory/Downloads/ cory@$LANSRV:/home/cory/thinkpad/Downloads || { echo "Script error while syncing ~/Downloads" >&2;exit 1; }
+
+# Scripts
+printf "\nrsync-ing ~/bin\n"
+/usr/bin/rsync -avzh -e "ssh -p443 -i /home/cory/.ssh/id" /home/cory/bin/ cory@$LANSRV:/home/cory/thinkpad/bin || { echo "Script error while syncing ~/bin" >&2;exit 1; }
+
+# Videos
+printf "\nrsync-ing ~/Videos\n"
+/usr/bin/rsync -avzh -e "ssh -p443 -i /home/cory/.ssh/id" /home/cory/Videos/ cory@$LANSRV:/home/cory/thinkpad/Videos || { echo "Script error while syncing ~/Videos" >&2;exit 1; }
+
+# Arch Build System
+printf "\nrsync-ing ~/abs\n"
+/usr/bin/rsync -avzh -e "ssh -p443 -i /home/cory/.ssh/id" /home/cory/abs/ cory@$LANSRV:/home/cory/thinkpad/abs || { echo "Script error while syncing ~/abs" >&2;exit 1; }
+
+# Home config dir
+printf "\nrsync-ing ~/etc\n"
+/usr/bin/rsync -avzh -e "ssh -p443 -i /home/cory/.ssh/id" /home/cory/etc/ cory@$LANSRV:/home/cory/thinkpad/etc || { echo "Script error while syncing ~/etc" >&2;exit 1; }
+
+# Home log files
+printf "\nrsync-ing ~/logs\n"
+/usr/bin/rsync -avzh -e "ssh -p443 -i /home/cory/.ssh/id_rsa" /home/cory/logs/ cory@$LANSRV:/home/cory/thinkpad/logs || { echo "Script error while syncing ~/logs" >&2;exit 1; }
+
+printf "\nSuccess\n" && exit 0
